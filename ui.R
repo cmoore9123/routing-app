@@ -19,7 +19,15 @@ shinyUI(function(session, input, output) {
     
     dashboardBody(
       
+      tags$head((
+        tags$style(HTML('
+                        .content {
+                        padding: 1px;
+                        }'))
+      )),
+      
       column(width = 12,
+             
              
              fluidRow(
                
@@ -42,7 +50,7 @@ shinyUI(function(session, input, output) {
              
              fluidRow(
                
-               box(width = 12,
+               box(width = 12, 
                    
                    shinycssloaders::withSpinner(leafletOutput(outputId = 'leaflet_map'))
                    
@@ -51,6 +59,8 @@ shinyUI(function(session, input, output) {
              
              )
     )
+    
+    
   )
   
 })
