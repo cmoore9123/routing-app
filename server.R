@@ -8,6 +8,8 @@ library(osrm)
 library(leaflet)
 library(htmltools)
 
+options(osrm.server = 'http://dataconductor.co.uk:5000/')
+
 shinyServer(function(session, input, output) {
   
   leaflet_output <- eventReactive(input$update, {
