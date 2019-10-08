@@ -7,12 +7,13 @@ library(nominatim)
 library(osrm)
 library(leaflet)
 library(htmltools)
+library(shinycssloaders)
 
 shinyUI(function(session, input, output) {
   
   dashboardPage(
     
-    dashboardHeader(title = 'Route Planner'),
+    dashboardHeader(disable = TRUE),
     
     dashboardSidebar(disable = TRUE),
     
@@ -22,18 +23,20 @@ shinyUI(function(session, input, output) {
              
              fluidRow(
                
-               box(width = 2,
+               box(width = 12,
+               
+               splitLayout(
                    
                    actionButton(inputId = 'update',
-                                label = 'Search')),
+                                label = 'Search'),
                    
-               box(width = 4,
+                   textInput(inputId = 'origin', label = 'Start point'),
                    
-                   textInput(inputId = 'origin', label = 'Start point')),
-               
-               box(width = 4,
+                   textInput(inputId = 'dest', label = 'Destination')
                    
-                   textInput(inputId = 'dest', label = 'Destination'))
+               )
+               )
+                   
                
              ),
              
@@ -41,7 +44,9 @@ shinyUI(function(session, input, output) {
                
                box(width = 12,
                    
-                   leafletOutput(outputId = 'leaflet_map'))
+                   shinycssloaders::withSpinner(leafletOutput(outputId = 'leaflet_map'))
+                   
+                  )
              )
              
              )
